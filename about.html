@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | 許宸華 Chen-Hua HSU</title>
+  <meta name="description" content="關於許宸華 Chen-Hua HSU — 教育背景、研究方向、論文與技術技能。" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav id="main-nav" role="navigation" aria-label="主導覽">
+  <a href="index.html" class="nav-logo">Chen-Hua HSU</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+  <section class="section" aria-label="關於我">
+    <div class="section-header reveal">
+      <div class="section-label">About Me</div>
+      <h1 class="section-title">Who I <span>Am</span></h1>
+      <p class="section-desc">
+        具備成大工程科學系碩士學位的 AI/ML 工程師，專注於多模態 AI 研究與模型優化，涵蓋 VLM 可靠性、推理效率、系統整合及邊緣 AI。
+      </p>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="section-header reveal" style="margin-top: 3.5rem;">
+      <div class="section-label">Education</div>
+      <h2 class="section-title">學歷 <span>背景</span></h2>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">2024/09 – 2026/07</div>
+        <div class="timeline-title">國立成功大學 National Cheng Kung University</div>
+        <div class="timeline-sub">工程科學學系 碩士 · Tainan, Taiwan</div>
+        <div class="timeline-body">
+          <div class="skill-tags" style="margin-bottom:0.5rem;">
+            <span class="tag">深度學習</span>
+            <span class="tag">生成式 AI</span>
+            <span class="tag">NLP</span>
+            <span class="tag">最佳化</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2020/09 – 2024/07</div>
+        <div class="timeline-title">國立成功大學 National Cheng Kung University</div>
+        <div class="timeline-sub">工程科學學系 學士 · Tainan, Taiwan</div>
+        <div class="timeline-body">
+          <div class="skill-tags" style="margin-bottom:0.5rem;">
+            <span class="tag">機器學習</span>
+            <span class="tag">資料結構</span>
+            <span class="tag">演算法</span>
+            <span class="tag">離散數學</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin: 3.5rem 0;"></div>
+
+    <!-- THESIS -->
+    <div class="section-header reveal">
+      <div class="section-label">Research</div>
+      <h2 class="section-title">碩士 <span>論文</span></h2>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div>
+          <div class="timeline-date" style="margin-bottom: 0.5rem;">2026/07 · Master Thesis</div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; line-height: 1.4; margin-bottom: 0.75rem;">
+            Distilling Visual Contrastive Decoding into a Single Model<br>for Enhanced Inference and Hallucination Mitigation
+          </h3>
+        </div>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.93rem; line-height: 1.7; margin-bottom: 1.25rem;">
+        提出針對 LLaVA-1.5-7B 的 <strong style="color: var(--text-primary);">VCDD</strong>（Visual Contrastive Decoding Distillation）方法，使用 Smooth-AW KL 蒸餾與防遺忘正則化，將 Token 級防幻覺訊號轉移至 LoRA 適配器，恢復單路推理同時保持幻覺抑制效果。
+      </p>
+      <div class="stats-row" style="margin-bottom: 1.25rem;">
+        <div class="stat-card" style="flex: 1 1 140px;">
+          <div class="stat-number">1.9×</div>
+          <div class="stat-label">POPE 吞吐量</div>
+        </div>
+        <div class="stat-card" style="flex: 1 1 140px;">
+          <div class="stat-number">47.4%</div>
+          <div class="stat-label">延遲降低</div>
+        </div>
+        <div class="stat-card" style="flex: 1 1 140px;">
+          <div class="stat-number">1575.89</div>
+          <div class="stat-label">MME Score</div>
+        </div>
+        <div class="stat-card" style="flex: 1 1 140px;">
+          <div class="stat-number">4.219</div>
+          <div class="stat-label">LLaVA-Bench</div>
+        </div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag tag-accent">Knowledge Distillation</span>
+        <span class="tag tag-accent">Hallucination Mitigation</span>
+        <span class="tag tag-accent">LoRA</span>
+        <span class="tag tag-accent">VLM</span>
+        <span class="tag tag-accent">PyTorch</span>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin: 3.5rem 0;"></div>
+
+    <!-- SKILLS -->
+    <div class="section-header reveal">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">技術 <span>技能</span></h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="card skill-category reveal">
+        <h4>AI / ML</h4>
+        <div class="skill-tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">VLMs</span>
+          <span class="tag">LLMs</span>
+          <span class="tag">LoRA</span>
+          <span class="tag">Knowledge Distillation</span>
+          <span class="tag">RAG</span>
+        </div>
+      </div>
+
+      <div class="card skill-category reveal">
+        <h4>Model Optimization</h4>
+        <div class="skill-tags">
+          <span class="tag">Model Optimization</span>
+          <span class="tag">Model Evaluation</span>
+          <span class="tag">Inference Profiling</span>
+        </div>
+      </div>
+
+      <div class="card skill-category reveal">
+        <h4>Programming</h4>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">C++</span>
+          <span class="tag">API Integration</span>
+        </div>
+      </div>
+
+      <div class="card skill-category reveal">
+        <h4>Data Analysis</h4>
+        <div class="skill-tags">
+          <span class="tag">NumPy</span>
+          <span class="tag">pandas</span>
+          <span class="tag">Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="card skill-category reveal">
+        <h4>Tools & Platforms</h4>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Raspberry Pi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 Chen-Hua HSU 許宸華 · Built with ❤️ and hosted on GitHub Pages</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

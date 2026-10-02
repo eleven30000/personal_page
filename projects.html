@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | 許宸華 Chen-Hua HSU</title>
+  <meta name="description" content="許宸華 Chen-Hua HSU 的研究與專案作品集 — VLM、AIoT、Full-Stack。" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav id="main-nav" role="navigation" aria-label="主導覽">
+  <a href="index.html" class="nav-logo">Chen-Hua HSU</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+  <section class="section" aria-label="作品集">
+    <div class="section-header reveal">
+      <div class="section-label">Projects</div>
+      <h1 class="section-title">研究 <span>與作品</span></h1>
+      <p class="section-desc">涵蓋多模態 AI 研究、智慧系統整合與全端工程的實作項目。</p>
+    </div>
+
+    <!-- THESIS PROJECT AS FEATURED -->
+    <div class="section-header reveal" style="margin-top: 2rem; margin-bottom: 1.25rem;">
+      <div class="section-label">Featured</div>
+      <h2 class="section-title" style="font-size: 1.5rem;">碩士論文</h2>
+    </div>
+
+    <div class="card reveal" style="margin-bottom: 3rem;">
+      <div class="timeline-date" style="margin-bottom: 0.5rem;">2026/07 · Master Thesis</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 0.75rem;">
+        Distilling Visual Contrastive Decoding into a Single Model for Enhanced Inference and Hallucination Mitigation
+      </h3>
+      <p style="color: var(--text-secondary); font-size: 0.93rem; line-height: 1.7; margin-bottom: 1rem;">
+        提出 VCDD 方法針對 LLaVA-1.5-7B，使用 Smooth-AW KL 蒸餾與防遺忘正則化，將 Token 級防幻覺訊號轉移至 LoRA 適配器。在 POPE 9 種設定下 F1 分數全數超越 Baseline，推理延遲較 Online VCD 降低 <strong style="color: var(--text-primary);">47.4%</strong>（270ms → 142ms/query），提供 <strong style="color: var(--text-primary);">1.9× 吞吐量</strong>並恢復單路推理。
+      </p>
+      <div class="skill-tags">
+        <span class="tag tag-accent">Knowledge Distillation</span>
+        <span class="tag tag-accent">Hallucination Mitigation</span>
+        <span class="tag tag-accent">LoRA</span>
+        <span class="tag tag-accent">VLM</span>
+        <span class="tag tag-accent">LLaVA-1.5-7B</span>
+        <span class="tag tag-accent">PyTorch</span>
+      </div>
+    </div>
+
+    <!-- PROJECTS GRID -->
+    <div class="section-header reveal" style="margin-bottom: 1.5rem;">
+      <div class="section-label">Research & Engineering</div>
+      <h2 class="section-title" style="font-size: 1.5rem;">其他 <span>專案</span></h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="card project-card reveal">
+        <div class="card-top">
+          <div>
+            <div class="timeline-date" style="margin-bottom: 0.4rem;">2025/01 – 2025/12</div>
+            <h3>影片注意力查詢過濾技術</h3>
+          </div>
+          <span style="font-size: 1.5rem;" aria-hidden="true">🎥</span>
+        </div>
+        <p>
+          共同開發前景/背景查詢過濾與池化機制，以 Python/PyTorch 實現原型與消融實驗，評估效率與準確度的權衡。降低 <strong style="color: var(--text-primary);">24% GFLOPs</strong> 計算量同時提升 <strong style="color: var(--text-primary);">Top-1 準確度 6pp</strong>（768 支影片 × 16 影格）。台灣專利申請案號 P52140051TW 審理中。
+        </p>
+        <div class="card-footer">
+          <span class="tag tag-accent">專利申請中</span>
+          <span class="tag">Python</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">VLM</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card project-card reveal">
+        <div class="card-top">
+          <div>
+            <div class="timeline-date" style="margin-bottom: 0.4rem;">2024/10 – 2025/09</div>
+            <h3>變壓器線圈繞線 AI 推薦系統</h3>
+          </div>
+          <span style="font-size: 1.5rem;" aria-hidden="true">⚙️</span>
+        </div>
+        <p>
+          開發將變壓器規格映射至繞線參數的迴歸系統，減少工程設計流程中的人工試錯。打造實時獲取繞線推薦的網站，透過 Python API 連接 JavaScript 前端介面與迴歸模型。
+        </p>
+        <div class="card-footer">
+          <span class="tag tag-accent">Full-Stack</span>
+          <span class="tag">Python</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">APIs</span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card project-card reveal">
+        <div class="card-top">
+          <div>
+            <div class="timeline-date" style="margin-bottom: 0.4rem;">2024/09 – 2024/12</div>
+            <h3>結合 VLM 與 RAG 之智慧安防系統</h3>
+          </div>
+          <span style="font-size: 1.5rem;" aria-hidden="true">🔐</span>
+        </div>
+        <p>
+          建構多模態校園安全管線，結合 VLM 攝影機影像場景理解與溫濕度感測器數據進行風險評估。整合 Raspberry Pi 邊緣端收集、基於安全指南與 SOP 的 RAG 機制，以及 LINE Bot 即時警報通知。
+        </p>
+        <div class="card-footer">
+          <span class="tag tag-accent">AIoT</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Raspberry Pi</span>
+          <span class="tag">LINE Bot</span>
+          <span class="tag">VLM</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 Chen-Hua HSU 許宸華 · Built with ❤️ and hosted on GitHub Pages</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
