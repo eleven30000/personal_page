@@ -87,3 +87,34 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initReveal();
 });
+
+/* ===== MODEL OUTPUT SWITCHER — Tab Interaction ===== */
+function initModelSwitcher() {
+  const switcher = document.getElementById('modelSwitcher');
+  if (!switcher) return;
+
+  switcher.querySelectorAll('.sw-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.target;
+
+      // update tab active state
+      switcher.querySelectorAll('.sw-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // show/hide panels
+      switcher.querySelectorAll('.sw-panel').forEach(panel => {
+        if (panel.id === targetId) {
+          panel.hidden = false;
+        } else {
+          panel.hidden = true;
+        }
+      });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initModelSwitcher);
