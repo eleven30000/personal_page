@@ -131,8 +131,8 @@ main { padding-top:var(--nav-h); position:relative; z-index:1; }
 
 .hero-visual { flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
 .avatar-ring {
-  width:clamp(180px,22vw,280px); height:clamp(180px,22vw,280px);
-  border-radius:50%; background:var(--gradient-main); padding:3px;
+  width:clamp(240px,30vw,380px); height:clamp(240px,30vw,380px);
+  border-radius:50%; background:var(--gradient-main); padding:4px;
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }

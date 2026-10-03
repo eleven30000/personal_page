@@ -114,8 +114,7 @@
           </div>
         </div><!-- end .timeline -->
         <figure class="img-placeholder-wrap" style="align-self:start;">
-          <img src="assets/images/graduate_fromNCKU.JPG" alt="NCKU 畢業典禮" class="edu-photo">
-          <figcaption>國立成功大學 畢業典禮</figcaption>
+          <img src="assets/images/graduate_fromNCKU.JPG" alt="NCKU 畢業典禮" class="edu-photo" style="max-width:140px; width:100%; margin:0 auto; display:block;">
         </figure>
       </div><!-- end .edu-col -->
 
@@ -281,7 +280,7 @@
                       <th>Recall ↑</th>
                     </tr>
                   </thead>
-                  <tbody>
+                   <tbody>
                     <tr>
                       <td>LLaVA-1.5-7B (Baseline)</td>
                       <td>0.8079</td>
@@ -292,23 +291,23 @@
                     <tr>
                       <td>VCD (Teacher)</td>
                       <td>0.8109</td>
-                      <td>0.8116</td>
+                      <td><strong>0.8116</strong></td>
                       <td>0.8207</td>
                       <td><strong>0.8081</strong></td>
                     </tr>
                     <tr class="row-highlight">
                       <td>VCDD (Ours)</td>
-                      <td><strong>0.8138</strong></td>
-                      <td><strong>0.8118</strong></td>
-                      <td>0.8313</td>
-                      <td>0.7980</td>
+                      <td><strong>0.8120</strong></td>
+                      <td>0.8091</td>
+                      <td>0.8329</td>
+                      <td>0.7913</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <p class="table-note">
                 各指標以 3 資料集（COCO / GQA / AOKVQA）× 3 評測方式（Random / Popular / Adversarial）共 9 種設定取平均。
-                VCDD 在 Accuracy 與 F1 均超越 Baseline 與 Teacher VCD，且推理延遲較 Online VCD 降低 47.4%。
+                VCDD 在 Accuracy 超越所有基線；VCD 在 Recall 表現最佳；推理延遲較 Online VCD 降低 47.4%。
               </p>
             </div>
           </div>
