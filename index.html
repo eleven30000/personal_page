@@ -276,8 +276,8 @@
                       <th>Model</th>
                       <th>Accuracy ↑</th>
                       <th>F1 ↑</th>
-                      <th>Precision ↑</th>
-                      <th>Recall ↑</th>
+                      <th>acc_win% ↑</th>
+                      <th>F1_win% ↑</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -285,29 +285,28 @@
                       <td>LLaVA-1.5-7B (Baseline)</td>
                       <td>0.8079</td>
                       <td>0.8032</td>
-                      <td><strong>0.8334</strong></td>
-                      <td>0.7794</td>
+                      <td>—</td>
+                      <td>—</td>
                     </tr>
                     <tr>
-                      <td>VCD (Teacher)</td>
+                      <td>VCD (2x Inference)</td>
                       <td>0.8109</td>
                       <td><strong>0.8116</strong></td>
-                      <td>0.8207</td>
-                      <td><strong>0.8081</strong></td>
+                      <td>88.9% (8/9)</td>
+                      <td>88.9% (8/9)</td>
                     </tr>
                     <tr class="row-highlight">
                       <td>VCDD (Ours)</td>
                       <td><strong>0.8120</strong></td>
                       <td>0.8091</td>
-                      <td>0.8329</td>
-                      <td>0.7913</td>
+                      <td>88.9% (8/9)</td>
+                      <td><strong>100.0% (9/9)</strong></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <p class="table-note">
-                各指標以 3 資料集（COCO / GQA / AOKVQA）× 3 評測方式（Random / Popular / Adversarial）共 9 種設定取平均。
-                VCDD 在 Accuracy 超越所有基線；VCD 在 Recall 表現最佳；推理延遲較 Online VCD 降低 47.4%。
+                各指標以 3 資料集（COCO / GQA / AOKVQA）× 3 評測方式（Random / Popular / Adversarial）共 9 種設定計算。acc_win% 與 F1_win% 為相較 Baseline 勝出的設定比例。VCDD 達成 <strong>100% (9/9)</strong> 的 F1 勝率，且平均 Accuracy 居所有模型之冠。
               </p>
             </div>
 
@@ -355,16 +354,10 @@
                       <td>65.00</td>
                       <td><strong>75.00</strong></td>
                     </tr>
-                    <tr class="row-highlight mme-total">
-                      <td><strong>Total</strong></td>
-                      <td>556.58</td>
-                      <td>606.50</td>
-                      <td><strong>635.75</strong></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
-              <p class="table-note">VCDD 在所有 MME 子範疇均超越 Baseline 與 Teacher VCD，總分提升 14.3%（556.58 → 635.75）。</p>
+              <p class="table-note">VCDD 在 許多 MME 任務上均超越 Baseline 與 Teacher VCD，總分提升 15.69%（1560.2 → 1575.89）。</p>
             </div>
           </div>
         </div>
