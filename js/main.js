@@ -69,27 +69,126 @@ function initMobileNav() {
   });
 }
 
+/* ===== SCROLL PROGRESS BAR ===== */
+function initScrollProgress() {
+  const nav = document.getElementById('main-nav');
+  if (!nav) return;
+
+  let bar = nav.querySelector('.scroll-progress-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.className = 'scroll-progress-bar';
+    nav.appendChild(bar);
+  }
+
+  let ticking = false;
+  function updateProgress() {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+}
+
 /* ===== SCROLL REVEAL ===== */
 function initReveal() {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
-/* ===== INIT ===== */
-document.addEventListener('DOMContentLoaded', () => {
-  initScrollSpy();
-  initNavScroll();
-  initMobileNav();
-  initReveal();
-});
+/* ===== STAT COUNTER ANIMATION ===== */
+function initStatCounter() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  if (!statNumbers.length) return;
+
+  // Respect user reduced-motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateStat(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  statNumbers.forEach(el => observer.observe(el));
+
+  function animateStat(el) {
+    const rawText = el.textContent.trim();
+
+    // Fraction format e.g. "9/9"
+    const fractionMatch = rawText.match(/^(\d+)\/(\d+)$/);
+    if (fractionMatch) {
+      const targetNum = parseInt(fractionMatch[1], 10);
+      const totalNum = fractionMatch[2];
+      const duration = 1200;
+      const startTime = performance.now();
+
+      function updateFraction(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+        const current = Math.round(targetNum * ease);
+        el.textContent = `${current}/${totalNum}`;
+        if (progress < 1) {
+          requestAnimationFrame(updateFraction);
+        } else {
+          el.textContent = rawText;
+        }
+      }
+      requestAnimationFrame(updateFraction);
+      return;
+    }
+
+    // Number format with possible prefix and suffix e.g. "+6pp", "47.4%", "1575.89", "6min", "24%"
+    const numMatch = rawText.match(/^([^\d.]*)(\d+(?:\.\d+)?)([^\d.]*)$/);
+    if (!numMatch) return;
+
+    const prefix = numMatch[1];
+    const targetVal = parseFloat(numMatch[2]);
+    const suffix = numMatch[3];
+    const decimals = numMatch[2].includes('.') ? numMatch[2].split('.')[1].length : 0;
+
+    const duration = 1200;
+    const startTime = performance.now();
+
+    function updateNumber(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+      const current = (targetVal * ease).toFixed(decimals);
+      el.textContent = `${prefix}${current}${suffix}`;
+      if (progress < 1) {
+        requestAnimationFrame(updateNumber);
+      } else {
+        el.textContent = rawText;
+      }
+    }
+    requestAnimationFrame(updateNumber);
+  }
+}
 
 /* ===== MODEL OUTPUT SWITCHER — Tab Interaction ===== */
 function initModelSwitcher() {
@@ -119,8 +218,6 @@ function initModelSwitcher() {
     });
   });
 }
-
-document.addEventListener('DOMContentLoaded', initModelSwitcher);
 
 /* ===== LIGHTBOX MODAL (Expand image & Click blank to restore) ===== */
 function initLightboxModal() {
@@ -195,4 +292,14 @@ function initLightboxModal() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initLightboxModal);
+/* ===== UNIFIED DOM READY INITIALIZATION ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollSpy();
+  initNavScroll();
+  initMobileNav();
+  initScrollProgress();
+  initReveal();
+  initStatCounter();
+  initModelSwitcher();
+  initLightboxModal();
+});
