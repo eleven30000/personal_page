@@ -545,3 +545,195 @@ footer {
   border-top: 1px solid var(--border-hover);
   font-weight: 700;
 }
+
+/* ===== ARCH TRIGGER CARD & THUMBNAIL ===== */
+.arch-trigger-card {
+  display: flex;
+  flex-direction: column;
+}
+.arch-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.arch-card-header .card-inner-title {
+  margin-bottom: 0;
+}
+.arch-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(91, 110, 245, 0.15);
+  border: 1px solid var(--border-hover);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+.arch-expand-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+.arch-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
+}
+.arch-thumb-wrap {
+  position: relative;
+  height: 160px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: var(--bg-secondary);
+  transition: all var(--transition);
+}
+.arch-thumb-wrap:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 18px var(--accent-glow);
+  transform: translateY(-2px);
+}
+.arch-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform var(--transition);
+}
+.arch-thumb-wrap:hover .arch-thumb-img {
+  transform: scale(1.03);
+}
+.arch-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 14, 26, 0.2) 0%, rgba(10, 14, 26, 0.75) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  opacity: 0.88;
+  transition: all var(--transition);
+}
+.arch-thumb-wrap:hover .arch-thumb-overlay {
+  opacity: 1;
+  background: rgba(10, 14, 26, 0.55);
+}
+.arch-overlay-icon {
+  font-size: 1.25rem;
+}
+.arch-overlay-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.arch-hint-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.65rem;
+}
+
+/* ===== LIGHTBOX MODAL ===== */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 2.5vw, 2rem);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.lightbox-modal.active {
+  display: flex;
+  opacity: 1;
+}
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 16, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.lightbox-dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 95vw;
+  max-height: 92vh;
+}
+.lightbox-img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 95vw;
+  max-height: 80vh;
+}
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-hover);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--accent-glow);
+  background: #0f1526;
+  transform: scale(0.96);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lightbox-modal.active .lightbox-img {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--border-hover);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+.lightbox-close:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+.lightbox-footer {
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: rgba(19, 26, 46, 0.85);
+  border: 1px solid var(--border);
+  padding: 0.35rem 1.1rem;
+  border-radius: 100px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}

@@ -236,11 +236,26 @@
                 <li><strong>Token 級訊號轉移</strong>：訓練階段以 VCD 輸出作為 soft label，讓 LoRA 吸收其防幻覺行為。</li>
               </ul>
             </div>
-            <div>
-              <figure class="img-placeholder-wrap">
-                <img src="assets/images/thesis_arch.png" alt="VCDD 架構圖">
-                <figcaption>圖：VCDD 訓練流程與蒸餾架構</figcaption>
-              </figure>
+            <div class="card arch-trigger-card">
+              <div class="arch-card-header">
+                <h4 class="card-inner-title">系統架構圖</h4>
+                <button type="button" class="arch-expand-btn open-arch-trigger" id="openArchBtn" aria-label="點擊展開架構圖">
+                  <span class="arch-btn-icon">🔍</span>
+                  <span>展開大圖</span>
+                </button>
+              </div>
+              <p class="arch-card-desc">VCDD 訓練流程與蒸餾架構（點擊圖示或縮圖展開高清大圖）：</p>
+              <div class="arch-thumb-wrap open-arch-trigger" id="openArchModal" role="button" tabindex="0" title="點擊展開高解析度架構圖">
+                <img src="assets/images/thesis_arch.png" alt="VCDD 訓練流程與蒸餾架構" class="arch-thumb-img">
+                <div class="arch-thumb-overlay">
+                  <span class="arch-overlay-icon">🔍</span>
+                  <span class="arch-overlay-text">點擊展開完整架構圖</span>
+                </div>
+              </div>
+              <div class="arch-hint-bar">
+                <span class="arch-hint-icon">💡</span>
+                <span>展開後可檢視細節，點擊任意空白處即可復原</span>
+              </div>
             </div>
           </div>
         </div>
@@ -250,6 +265,10 @@
           <div class="proj-sub-label">Results — Metrics</div>
           <div class="proj-sub-content">
             <div class="stats-row" style="margin-bottom:1.5rem;">
+              <div class="stat-card reveal">
+                <div class="stat-number">6min</div>
+                <div class="stat-label">總訓練只花費6分鐘<br><small>硬體性能：RTX4090(24G)</small></div>
+              </div>
               <div class="stat-card reveal">
                 <div class="stat-number">9/9</div>
                 <div class="stat-label">POPE F1 score 提升</div>
@@ -261,10 +280,6 @@
               <div class="stat-card reveal">
                 <div class="stat-number">1575.89</div>
                 <div class="stat-label">MME Score<br><small>1560.2 → 1575.89</small></div>
-              </div>
-              <div class="stat-card reveal">
-                <div class="stat-number">4.219</div>
-                <div class="stat-label">LLaVA-Bench Score<br><small>4.050 → 4.219</small></div>
               </div>
             </div>
             <div class="card reveal">
@@ -306,7 +321,8 @@
                 </table>
               </div>
               <p class="table-note">
-                各指標以 3 資料集（COCO / GQA / AOKVQA）× 3 評測方式（Random / Popular / Adversarial）共 9 種設定計算。acc_win% 與 F1_win% 為相較 Baseline 勝出的設定比例。VCDD 達成 <strong>100% (9/9)</strong> 的 F1 勝率，且平均 Accuracy 居所有模型之冠。
+                各指標以 3 資料集（COCO / GQA / AOKVQA）× 3 評測方式（Random / Popular / Adversarial）共 9 種設定計算。acc_win% 與 F1_win% 為相較
+                Baseline 勝出的設定比例。VCDD 達成 <strong>100% (9/9)</strong> 的 F1 勝率，且平均 Accuracy 居所有模型之冠。
               </p>
             </div>
 
@@ -319,7 +335,7 @@
                     <tr>
                       <th>Category</th>
                       <th>Baseline</th>
-                      <th>VCD (Teacher)</th>
+                      <th>VCD (2x Inference)</th>
                       <th>VCDD (Ours) ↑</th>
                     </tr>
                   </thead>
@@ -724,6 +740,20 @@
     </section>
 
   </main>
+
+  <!-- Lightbox Modal for thesis_arch -->
+  <div id="archModal" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-dialog">
+      <button type="button" class="lightbox-close" id="closeArchModal" aria-label="關閉架構圖">✕</button>
+      <div class="lightbox-img-box">
+        <img src="assets/images/thesis_arch.png" alt="VCDD 訓練流程與蒸餾架構完整大圖" class="lightbox-img">
+      </div>
+      <div class="lightbox-footer">
+        <span>圖：VCDD 訓練流程與蒸餾架構 · 點擊空白處或按 ESC 即可復原</span>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <p>© 2026 Chen-Hua HSU 許宸華 · Built with ❤️ and hosted on GitHub Pages</p>

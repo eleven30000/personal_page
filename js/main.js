@@ -118,3 +118,58 @@ function initModelSwitcher() {
 }
 
 document.addEventListener('DOMContentLoaded', initModelSwitcher);
+
+/* ===== ARCHITECTURE LIGHTBOX MODAL ===== */
+function initArchModal() {
+  const triggers = document.querySelectorAll('.open-arch-trigger');
+  const modal = document.getElementById('archModal');
+  const closeBtn = document.getElementById('closeArchModal');
+  if (!modal || triggers.length === 0) return;
+
+  function open() {
+    modal.style.display = 'flex';
+    void modal.offsetWidth; // force reflow for smooth CSS transition
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('active')) {
+        modal.style.display = 'none';
+      }
+    }, 250);
+  }
+
+  triggers.forEach(trig => {
+    trig.addEventListener('click', open);
+    trig.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', close);
+
+  // Click on blank space (anywhere except the image itself) restores/closes
+  modal.addEventListener('click', (e) => {
+    if (!e.target.closest('.lightbox-img')) {
+      close();
+    }
+  });
+
+  // ESC key restores/closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      close();
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initArchModal);
