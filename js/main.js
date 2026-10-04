@@ -119,14 +119,21 @@ function initModelSwitcher() {
 
 document.addEventListener('DOMContentLoaded', initModelSwitcher);
 
-/* ===== ARCHITECTURE LIGHTBOX MODAL ===== */
-function initArchModal() {
-  const triggers = document.querySelectorAll('.open-arch-trigger');
+/* ===== LIGHTBOX MODAL (Expand image & Click blank to restore) ===== */
+function initLightboxModal() {
   const modal = document.getElementById('archModal');
   const closeBtn = document.getElementById('closeArchModal');
-  if (!modal || triggers.length === 0) return;
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  if (!modal) return;
 
-  function open() {
+  function open(src, caption) {
+    if (lightboxImg && src) {
+      lightboxImg.src = src;
+    }
+    if (lightboxCaption && caption) {
+      lightboxCaption.textContent = caption;
+    }
     modal.style.display = 'flex';
     void modal.offsetWidth; // force reflow for smooth CSS transition
     modal.classList.add('active');
@@ -145,14 +152,27 @@ function initArchModal() {
     }, 250);
   }
 
-  triggers.forEach(trig => {
-    trig.addEventListener('click', open);
-    trig.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+  // Support all triggers: .open-lightbox-trigger, .open-arch-trigger, or any element with data-full
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.open-lightbox-trigger, .open-arch-trigger');
+    if (trigger) {
+      e.preventDefault();
+      const fullSrc = trigger.dataset.full || trigger.querySelector('img')?.src || trigger.getAttribute('src');
+      const caption = trigger.dataset.caption || trigger.querySelector('img')?.alt || trigger.getAttribute('alt') || '';
+      open(fullSrc, caption);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const activeEl = document.activeElement;
+      if (activeEl && activeEl.matches('.open-lightbox-trigger, .open-arch-trigger')) {
         e.preventDefault();
-        open();
+        const fullSrc = activeEl.dataset.full || activeEl.querySelector('img')?.src || activeEl.getAttribute('src');
+        const caption = activeEl.dataset.caption || activeEl.querySelector('img')?.alt || activeEl.getAttribute('alt') || '';
+        open(fullSrc, caption);
       }
-    });
+    }
   });
 
   if (closeBtn) closeBtn.addEventListener('click', close);
@@ -172,4 +192,4 @@ function initArchModal() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initArchModal);
+document.addEventListener('DOMContentLoaded', initLightboxModal);

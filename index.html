@@ -239,22 +239,15 @@
             <div class="card arch-trigger-card">
               <div class="arch-card-header">
                 <h4 class="card-inner-title">系統架構圖</h4>
-                <button type="button" class="arch-expand-btn open-arch-trigger" id="openArchBtn" aria-label="點擊展開架構圖">
-                  <span class="arch-btn-icon">🔍</span>
-                  <span>展開大圖</span>
-                </button>
               </div>
-              <p class="arch-card-desc">VCDD 訓練流程與蒸餾架構（點擊圖示或縮圖展開高清大圖）：</p>
-              <div class="arch-thumb-wrap open-arch-trigger" id="openArchModal" role="button" tabindex="0" title="點擊展開高解析度架構圖">
+              <p class="arch-card-desc">VCDD 訓練流程與蒸餾架構：</p>
+              <div class="arch-thumb-wrap open-arch-trigger open-lightbox-trigger" data-full="assets/images/thesis_arch.png" data-caption="圖：VCDD 訓練流程與蒸餾架構" id="openArchModal" role="button" tabindex="0"
+                title="點擊展開高解析度架構圖">
                 <img src="assets/images/thesis_arch.png" alt="VCDD 訓練流程與蒸餾架構" class="arch-thumb-img">
                 <div class="arch-thumb-overlay">
                   <span class="arch-overlay-icon">🔍</span>
                   <span class="arch-overlay-text">點擊展開完整架構圖</span>
                 </div>
-              </div>
-              <div class="arch-hint-bar">
-                <span class="arch-hint-icon">💡</span>
-                <span>展開後可檢視細節，點擊任意空白處即可復原</span>
               </div>
             </div>
           </div>
@@ -384,7 +377,7 @@
           <div class="proj-sub-content">
             <div class="example-demo reveal">
               <figure class="img-placeholder-wrap">
-                <img src="assets/images/thesis_example.png" alt="鐵達尼號輸入圖像" class="demo-img">
+                <img src="assets/images/thesis_example.png" alt="鐵達尼號輸入圖像" class="demo-img open-lightbox-trigger" data-full="assets/images/thesis_example.png" data-caption="Input Image：鐵達尼號 Jack &amp; Rose 場景" title="點擊放大檢視">
                 <figcaption>Input Image：鐵達尼號 Jack &amp; Rose 場景</figcaption>
               </figure>
               <div class="model-switcher" id="modelSwitcher">
@@ -462,7 +455,7 @@
           <div class="proj-sub-content two-col">
             <div class="card">
               <p>
-                Video Transformer 在處理長影片時，注意力機制會對大量的視覺 Token 進行計算，導致計算量隨影格數二次方成長，效率低落。
+                Video Transformer 在處理長影片時，注意力機制會對大量的視覺 Token 進行計算，導致效率低落，難以部屬至邊緣裝置。
               </p>
               <p style="margin-top:0.75rem;">
                 本研究共同開發<strong class="highlight">前景 / 背景查詢過濾與池化機制</strong>，在保持模型準確度的前提下，大幅削減 Transformer
@@ -470,13 +463,8 @@
               </p>
             </div>
             <figure class="img-placeholder-wrap">
-              <!-- ★ 替換為 <img src="assets/images/video_overview.png" alt="影片查詢過濾概覽"> -->
-              <div class="img-placeholder" data-label="研究概覽圖">
-                <span class="ip-icon">🎥</span>
-                <span class="ip-text">研究概覽示意圖</span>
-                <span class="ip-hint">assets/images/video_overview.png</span>
-              </div>
-              <figcaption>圖：影片 Transformer 查詢過濾架構概覽</figcaption>
+              <img src="assets/images/video_example.png" alt="影片查詢過濾應用範例" class="open-lightbox-trigger" data-full="assets/images/video_example.png" data-caption="圖：影片查詢過濾應用範例" title="點擊放大檢視">
+              <figcaption>圖：影片查詢過濾應用範例</figcaption>
             </figure>
           </div>
         </div>
@@ -485,15 +473,20 @@
         <div class="proj-subsection">
           <div class="proj-sub-label">Technical Approach</div>
           <div class="proj-sub-content two-col reverse">
-            <figure class="img-placeholder-wrap">
-              <!-- ★ 替換為 <img src="assets/images/video_method.png" alt="方法架構圖"> -->
-              <div class="img-placeholder" data-label="方法架構圖">
-                <span class="ip-icon">🖼️</span>
-                <span class="ip-text">方法架構圖</span>
-                <span class="ip-hint">assets/images/video_method.png</span>
+            <div class="card arch-trigger-card">
+              <div class="arch-card-header">
+                <h4 class="card-inner-title">方法流程圖</h4>
               </div>
-              <figcaption>圖：前景 / 背景查詢分離與池化流程</figcaption>
-            </figure>
+              <p class="arch-card-desc">前景 / 背景查詢分離與池化流程：</p>
+              <div class="arch-thumb-wrap open-lightbox-trigger" data-full="assets/images/video_method.png" data-caption="圖：前景 / 背景查詢分離與池化流程" role="button" tabindex="0"
+                title="點擊展開高解析度流程圖">
+                <img src="assets/images/video_method.png" alt="方法流程圖" class="arch-thumb-img">
+                <div class="arch-thumb-overlay">
+                  <span class="arch-overlay-icon">🔍</span>
+                  <span class="arch-overlay-text">點擊展開完整流程圖</span>
+                </div>
+              </div>
+            </div>
             <div class="card">
               <h4 class="card-inner-title">核心機制</h4>
               <ul class="proj-list">
@@ -747,10 +740,10 @@
     <div class="lightbox-dialog">
       <button type="button" class="lightbox-close" id="closeArchModal" aria-label="關閉架構圖">✕</button>
       <div class="lightbox-img-box">
-        <img src="assets/images/thesis_arch.png" alt="VCDD 訓練流程與蒸餾架構完整大圖" class="lightbox-img">
+        <img id="lightboxImg" src="assets/images/thesis_arch.png" alt="完整大圖" class="lightbox-img">
       </div>
       <div class="lightbox-footer">
-        <span>圖：VCDD 訓練流程與蒸餾架構 · 點擊空白處或按 ESC 即可復原</span>
+        <span id="lightboxCaption">圖：VCDD 訓練流程與蒸餾架構</span>
       </div>
     </div>
   </div>
