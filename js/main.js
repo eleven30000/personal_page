@@ -41,11 +41,11 @@ function initNavScroll() {
   if (!nav) return;
   window.addEventListener('scroll', () => {
     nav.style.background = window.scrollY > 20
-      ? 'rgba(255, 255, 255, 0.95)'
-      : 'rgba(255, 255, 255, 0.82)';
+      ? 'rgba(255,255,255,0.95)'
+      : 'rgba(255,255,255,0.85)';
     nav.style.boxShadow = window.scrollY > 20
-      ? '0 4px 20px rgba(15, 23, 42, 0.08)'
-      : '0 2px 10px rgba(15, 23, 42, 0.03)';
+      ? '0 2px 12px rgba(15,23,42,0.06)'
+      : 'none';
   }, { passive: true });
 }
 
