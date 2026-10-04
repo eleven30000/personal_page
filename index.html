@@ -38,8 +38,8 @@
         <h1>Hi, I'm <span class="name-accent">Chen-Hua HSU</span></h1>
         <p class="hero-subtitle">許宸華・台南，台灣</p>
         <p class="hero-desc">
-          成大工程科學系碩士生，專注於多模態 AI（VLM）研究、幻覺抑制與模型優化。
-          具備 Python 後端、JavaScript 前端及 AIoT 系統整合實務經驗。
+          AI工程師，專注於大型語言模型(LLMs、NLP)、多模態大型語言模型（MLLM、VLM）研究、幻覺抑制與模型優化。
+          具備模型Fintuning、架構優化、落地實施及 AIoT 系統整合實務經驗。
         </p>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary scroll-link">View Projects →</a>
@@ -53,7 +53,7 @@
             </svg>
             GitHub
           </a>
-          <a href="https://linkedin.com/in/chen-hua-hsu" target="_blank" rel="noopener" class="social-link">
+          <a href="https://linkedin.com/in/chen-hua-hsu-63691b365" target="_blank" rel="noopener" class="social-link">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.38V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.3zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.57V9h3.55v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
@@ -89,14 +89,20 @@
         <div class="section-label">About Me</div>
         <h2 class="section-title">Who I <span>Am</span></h2>
         <p class="section-desc">
-          具備成大工程科學系碩士學位的 AI/ML 工程師，專注於多模態 AI 研究與模型優化，
-          涵蓋 VLM 可靠性、推理效率、系統整合及邊緣 AI。
+          我畢業於國立成功大學工程科學系，目前持續於研究所專研人工智慧、機器學習與生成式 AI
+          相關能力。求學過程中，我逐漸確立自己對「以技術解決真實問題」的興趣；相較於只完成模型訓練，我更重視從需求釐清、資料處理、模型設計、效能驗證到系統部署的完整流程，並希望讓技術成果真正能被使用者理解與採用。
+          <br><br>
+          過往的專案實作經驗讓我理解，模型優化不僅是追求單一指標，而是在準確率、延遲、記憶體使用與實際情境之間做出合理取捨，也培養了以數據驗證假設、持續修正方法的工作習慣。
+          我認為自己最大的特質是有能力主動拆解問題、各個擊破，並以可量化的方式檢視成果。未來我希望在人工智慧、資料分析或軟體系統開發相關職務中，結合研究能力與實作經驗，持續打造能解決問題、產生實際價值的技術方案。
         </p>
       </div>
 
       <!-- EDUCATION -->
       <div class="subsection-label reveal">Education</div>
-      <div class="two-col edu-col reveal">
+      <div class="edu-wrap reveal">
+        <figure class="edu-float">
+          <img src="assets/images/graduate_fromNCKU.JPG" alt="NCKU 畢業典禮" class="edu-photo">
+        </figure>
         <div class="timeline">
           <div class="timeline-item">
             <div class="timeline-date">2024/09 – 2026/07</div>
@@ -109,14 +115,12 @@
             <div class="timeline-date">2020/09 – 2024/07</div>
             <div class="timeline-title">國立成功大學 NCKU</div>
             <div class="timeline-sub">工程科學學系 學士 · Tainan, Taiwan</div>
-            <div class="skill-tags"><span class="tag">機器學習</span><span class="tag">資料結構</span><span class="tag">演算法</span>
+            <div class="skill-tags"><span class="tag">機器學習</span><span class="tag">資料結構</span><span
+                class="tag">演算法</span>
             </div>
           </div>
         </div><!-- end .timeline -->
-        <figure class="img-placeholder-wrap" style="align-self:start;">
-          <img src="assets/images/graduate_fromNCKU.JPG" alt="NCKU 畢業典禮" class="edu-photo" style="max-width:140px; width:100%; margin:0 auto; display:block;">
-        </figure>
-      </div><!-- end .edu-col -->
+      </div><!-- end .edu-wrap -->
 
       <div class="section-divider" style="margin: 2.5rem 0;"></div>
 
@@ -193,9 +197,10 @@
             <span class="project-date">2026/07</span>
           </div>
           <h3 class="project-title">
-            Distilling Visual Contrastive Decoding into a Single Model<br>
-            for Enhanced Inference and Hallucination Mitigation
+            將視覺對⽐解碼蒸餾⾄單⼀模型以提升效能與抑制視覺幻覺
           </h3>
+          <p class="project-subtitle">Distilling Visual Contrastive Decoding into a Single Model for Enhanced Inference
+            and Hallucination Mitigation</p>
           <div class="skill-tags" style="margin-top:1rem;">
             <span class="tag tag-accent">Knowledge Distillation</span>
             <span class="tag tag-accent">Hallucination Mitigation</span>
@@ -210,11 +215,11 @@
           <div class="proj-sub-label">Overview</div>
           <div class="proj-sub-content card">
             <p>
-              大型視覺語言模型（VLMs）存在「幻覺」問題，常生成與圖像不符的文字。現有解法 Visual Contrastive Decoding（VCD）雖有效，但需同時運行兩路模型，推理成本倍增。
+              大型視覺語言模型（VLMs）存在「幻覺」問題，常生成與圖像不符的文字。現有解法 Visual Contrastive Decoding（VCD）雖有效，但需同時進行兩次模型推論，推理成本倍增。
             </p>
             <p style="margin-top:0.75rem;">
               本論文提出 <strong class="highlight">VCDD（Visual Contrastive Decoding Distillation）</strong>，透過知識蒸餾將 VCD
-              的防幻覺能力壓縮進單一 LoRA 適配器，使 LLaVA-1.5-7B 在單路推理下同時兼顧效率與可靠性。
+              的防幻覺能力壓縮進單一 LoRA 適配器，使 LLaVA-1.5-7B 能在單次推論下同時兼顧效率與可靠性。
             </p>
           </div>
         </div>
@@ -232,13 +237,8 @@
               </ul>
             </div>
             <div>
-              <!-- ★ 系統架構圖：替換為 <img src="assets/images/thesis_arch.png" alt="VCDD 架構圖"> -->
               <figure class="img-placeholder-wrap">
-                <div class="img-placeholder" data-label="VCDD 架構圖">
-                  <span class="ip-icon">🖼️</span>
-                  <span class="ip-text">VCDD 架構圖</span>
-                  <span class="ip-hint">assets/images/thesis_arch.png</span>
-                </div>
+                <img src="assets/images/thesis_arch.png" alt="VCDD 架構圖">
                 <figcaption>圖：VCDD 訓練流程與蒸餾架構</figcaption>
               </figure>
             </div>
@@ -251,8 +251,8 @@
           <div class="proj-sub-content">
             <div class="stats-row" style="margin-bottom:1.5rem;">
               <div class="stat-card reveal">
-                <div class="stat-number">1.9×</div>
-                <div class="stat-label">POPE 吞吐量提升</div>
+                <div class="stat-number">9/9</div>
+                <div class="stat-label">POPE F1 score 提升</div>
               </div>
               <div class="stat-card reveal">
                 <div class="stat-number">47.4%</div>
@@ -260,11 +260,11 @@
               </div>
               <div class="stat-card reveal">
                 <div class="stat-number">1575.89</div>
-                <div class="stat-label">MME Score</div>
+                <div class="stat-label">MME Score<br><small>1560.2 → 1575.89</small></div>
               </div>
               <div class="stat-card reveal">
                 <div class="stat-number">4.219</div>
-                <div class="stat-label">LLaVA-Bench Score</div>
+                <div class="stat-label">LLaVA-Bench Score<br><small>4.050 → 4.219</small></div>
               </div>
             </div>
             <div class="card reveal">
@@ -280,7 +280,7 @@
                       <th>Recall ↑</th>
                     </tr>
                   </thead>
-                   <tbody>
+                  <tbody>
                     <tr>
                       <td>LLaVA-1.5-7B (Baseline)</td>
                       <td>0.8079</td>
@@ -310,6 +310,62 @@
                 VCDD 在 Accuracy 超越所有基線；VCD 在 Recall 表現最佳；推理延遲較 Online VCD 降低 47.4%。
               </p>
             </div>
+
+            <!-- MME Benchmark -->
+            <div class="card reveal" style="margin-top:1.25rem;">
+              <h4 class="card-inner-title">MME Benchmark — Hallucination Sub-tasks</h4>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Baseline</th>
+                      <th>VCD (Teacher)</th>
+                      <th>VCDD (Ours) ↑</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Existence <span class="cat-zh">存在辨識</span></td>
+                      <td>170.00</td>
+                      <td>175.00</td>
+                      <td><strong>185.00</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Position <span class="cat-zh">空間位置</span></td>
+                      <td>113.33</td>
+                      <td>120.00</td>
+                      <td><strong>125.00</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Landmark <span class="cat-zh">地標</span></td>
+                      <td>125.75</td>
+                      <td>139.00</td>
+                      <td><strong>140.75</strong></td>
+                    </tr>
+                    <tr>
+                      <td>OCR <span class="cat-zh">文字辨識</span></td>
+                      <td>102.50</td>
+                      <td>107.50</td>
+                      <td><strong>110.00</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Numerical <span class="cat-zh">數值計算</span></td>
+                      <td>45.00</td>
+                      <td>65.00</td>
+                      <td><strong>75.00</strong></td>
+                    </tr>
+                    <tr class="row-highlight mme-total">
+                      <td><strong>Total</strong></td>
+                      <td>556.58</td>
+                      <td>606.50</td>
+                      <td><strong>635.75</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="table-note">VCDD 在所有 MME 子範疇均超越 Baseline 與 Teacher VCD，總分提升 14.3%（556.58 → 635.75）。</p>
+            </div>
           </div>
         </div>
 
@@ -326,8 +382,9 @@
                 <div class="sw-header">
                   <span class="sw-label">模型輸出</span>
                   <div class="sw-tabs" role="tablist">
-                    <button class="sw-tab active base-tab" data-target="sw-base" role="tab" aria-selected="true">Base</button>
-                    <button class="sw-tab vcd-tab"  data-target="sw-vcd"  role="tab" aria-selected="false">VCD</button>
+                    <button class="sw-tab active base-tab" data-target="sw-base" role="tab"
+                      aria-selected="true">Base</button>
+                    <button class="sw-tab vcd-tab" data-target="sw-vcd" role="tab" aria-selected="false">VCD</button>
                     <button class="sw-tab vcdd-tab" data-target="sw-vcdd" role="tab" aria-selected="false">VCDD</button>
                   </div>
                 </div>
@@ -345,11 +402,12 @@
                 <div class="sw-panel vcd-panel" id="sw-vcd" role="tabpanel" hidden>
                   <p class="sw-text">
                     "In the context of the movie, <span class="hall">&quot;The Pirates of the Caribbean:
-                    The Curse of the Black Pearl,&quot;</span> the scene depicts
+                      The Curse of the Black Pearl,&quot;</span> the scene depicts
                     <span class="fact">a romantic moment between the main characters</span>,
                     <span class="hall">Captain Jack Sparrow and Elizabeth Swann</span>, as they stand on
                     <span class="fact">a ship's deck at sunset</span>. This scene holds significance because it
-                    showcases <span class="fact">the development of their relationship and the strong bond they share</span>,
+                    showcases <span class="fact">the development of their relationship and the strong bond they
+                      share</span>,
                     which is central to the overall plot of the movie……"
                   </p>
                   <div class="sw-verdict partial">⚠️ 部分幻覺：電影名稱仍錯，場景描述較接近</div>
@@ -358,9 +416,9 @@
                   <p class="sw-text">
                     "In the context of the movie, this scene is significant as it captures
                     <span class="fact">the beginning of the romantic journey between the two main characters,
-                    <strong>Jack and Rose</strong></span>, during their time on the ship.
+                      <strong>Jack and Rose</strong></span>, during their time on the ship.
                     <span class="fact">It also highlights the dramatic moments after
-                    <strong>the ship has hit the iceberg and is taking in water</strong>.</span>
+                      <strong>the ship has hit the iceberg and is taking in water</strong>.</span>
                     As the lovers……, setting the stage for a compelling and tragic love story that will
                     unfold throughout the movie."
                   </p>
