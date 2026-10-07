@@ -328,6 +328,45 @@ function initStarfield() {
   requestAnimationFrame(render);
 }
 
+/* ===== 3D CARD TILT INTERACTION (Scoped to About & Contact cards) ===== */
+function init3DCardTilt() {
+  if (window.matchMedia('(pointer: coarse)').matches) return; // Skip on mobile/touch
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const tiltCards = document.querySelectorAll('#about .card, #contact .card, .skills-grid .card, .edu-float');
+  tiltCards.forEach(card => {
+    // Explicitly exclude any element inside #projects or .project-block
+    if (card.closest('#projects') || card.closest('.project-block')) return;
+
+    let bounds = null;
+
+    card.addEventListener('mouseenter', () => {
+      bounds = card.getBoundingClientRect();
+      card.style.transition = 'transform 0.1s ease-out, box-shadow 0.25s ease';
+    });
+
+    card.addEventListener('mousemove', e => {
+      if (!bounds) bounds = card.getBoundingClientRect();
+      const mouseX = e.clientX - bounds.left;
+      const mouseY = e.clientY - bounds.top;
+
+      const xPct = (mouseX / bounds.width - 0.5) * 2; // -1 to 1
+      const yPct = (mouseY / bounds.height - 0.5) * 2; // -1 to 1
+
+      const tiltX = -yPct * 6; // max ±6 deg
+      const tiltY = xPct * 6;
+
+      card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      bounds = null;
+    });
+  });
+}
+
 /* ===== STARDUST CURSOR TRAIL & CLICK BURST ===== */
 function initStardustCursor() {
   if (window.matchMedia('(pointer: coarse)').matches) return; // Desktop only
@@ -533,6 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initStatCounter();
   initStarfield();
+  init3DCardTilt();
   initStardustCursor();
   initModelSwitcher();
   initLightboxModal();
