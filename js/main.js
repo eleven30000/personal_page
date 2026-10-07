@@ -222,7 +222,10 @@ function initStatCounter() {
 
     // Number format with possible prefix and suffix e.g. "+6pp", "47.4%", "1575.89", "6min", "24%"
     const numMatch = rawText.match(/^([^\d.]*)(\d+(?:\.\d+)?)([^\d.]*)$/);
-    if (!numMatch) return;
+    if (!numMatch) {
+      setTimeout(() => triggerFinishPulse(el), 350);
+      return;
+    }
 
     const prefix = numMatch[1];
     const targetVal = parseFloat(numMatch[2]);
@@ -563,6 +566,26 @@ function initLightboxModal() {
   });
 }
 
+/* ===== LANGUAGE SWITCHER (Hash preservation & Preference Memory) ===== */
+function initLanguageSwitcher() {
+  document.querySelectorAll('.lang-pill-opt').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetLang = link.dataset.lang;
+      if (targetLang) {
+        try {
+          localStorage.setItem('portfolio_preferred_lang', targetLang);
+        } catch (_) {}
+      }
+      const currentHash = window.location.hash;
+      const targetHref = link.getAttribute('href');
+      if (currentHash && targetHref && !targetHref.includes('#')) {
+        e.preventDefault();
+        window.location.href = targetHref + currentHash;
+      }
+    });
+  });
+}
+
 /* ===== UNIFIED DOM READY INITIALIZATION ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
@@ -576,4 +599,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initStardustCursor();
   initModelSwitcher();
   initLightboxModal();
+  initLanguageSwitcher();
 });
