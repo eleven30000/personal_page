@@ -1,4 +1,8 @@
-/* ===== SCROLL LINK (anchor) ===== */
+/* ===================================================
+   CYBER-COSMIC INTERACTIVE SCRIPTS & ANIMATIONS
+   =================================================== */
+
+/* ===== SCROLL LINK (Smooth Anchor Scroll) ===== */
 document.querySelectorAll('a.scroll-link, .project-tabs a').forEach(link => {
   link.addEventListener('click', e => {
     const href = link.getAttribute('href');
@@ -35,16 +39,16 @@ function initScrollSpy() {
   onScroll();
 }
 
-/* ===== NAV SCROLL SHADOW ===== */
+/* ===== NAV SCROLL SHADOW & BLUR ===== */
 function initNavScroll() {
   const nav = document.querySelector('nav');
   if (!nav) return;
   window.addEventListener('scroll', () => {
     nav.style.background = window.scrollY > 20
-      ? 'rgba(255,255,255,0.95)'
-      : 'rgba(255,255,255,0.85)';
+      ? 'rgba(7, 10, 19, 0.94)'
+      : 'rgba(7, 10, 19, 0.85)';
     nav.style.boxShadow = window.scrollY > 20
-      ? '0 2px 12px rgba(15,23,42,0.06)'
+      ? '0 4px 20px rgba(0, 0, 0, 0.6)'
       : 'none';
   }, { passive: true });
 }
@@ -114,12 +118,11 @@ function initReveal() {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
-/* ===== STAT COUNTER ANIMATION ===== */
+/* ===== STAT COUNTER ANIMATION (with Glow Pulse) ===== */
 function initStatCounter() {
   const statNumbers = document.querySelectorAll('.stat-number');
   if (!statNumbers.length) return;
 
-  // Respect user reduced-motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
@@ -134,6 +137,16 @@ function initStatCounter() {
   }, { threshold: 0.25 });
 
   statNumbers.forEach(el => observer.observe(el));
+
+  function triggerFinishPulse(el) {
+    el.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.22s ease';
+    el.style.transform = 'scale(1.08)';
+    el.style.filter = 'drop-shadow(0 0 16px var(--neon-cyan))';
+    setTimeout(() => {
+      el.style.transform = 'scale(1)';
+      el.style.filter = '';
+    }, 240);
+  }
 
   function animateStat(el) {
     const rawText = el.textContent.trim();
@@ -156,6 +169,7 @@ function initStatCounter() {
           requestAnimationFrame(updateFraction);
         } else {
           el.textContent = rawText;
+          triggerFinishPulse(el);
         }
       }
       requestAnimationFrame(updateFraction);
@@ -184,10 +198,220 @@ function initStatCounter() {
         requestAnimationFrame(updateNumber);
       } else {
         el.textContent = rawText;
+        triggerFinishPulse(el);
       }
     }
     requestAnimationFrame(updateNumber);
   }
+}
+
+/* ===== CANVAS STARFIELD BACKGROUND (with Mouse Parallax) ===== */
+function initStarfield() {
+  const canvas = document.getElementById('starfieldCanvas');
+  if (!canvas) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  // Generate 80 stars with different depths
+  const starCount = Math.min(90, Math.floor((width * height) / 12000));
+  const stars = [];
+
+  for (let i = 0; i < starCount; i++) {
+    stars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 1.8 + 0.4,
+      baseAlpha: Math.random() * 0.7 + 0.25,
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
+      twinkleOffset: Math.random() * Math.PI * 2,
+      depth: Math.random() * 0.8 + 0.2, // for parallax
+      color: Math.random() > 0.6 ? '#67e8f9' : (Math.random() > 0.4 ? '#c084fc' : '#ffffff')
+    });
+  }
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  window.addEventListener('mousemove', e => {
+    mouseX = (e.clientX - width / 2) * 0.04;
+    mouseY = (e.clientY - height / 2) * 0.04;
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }, { passive: true });
+
+  let time = 0;
+  function render() {
+    time += 1;
+    ctx.clearRect(0, 0, width, height);
+
+    // Smooth lerp for parallax
+    offsetX += (mouseX - offsetX) * 0.05;
+    offsetY += (mouseY - offsetY) * 0.05;
+
+    for (let i = 0; i < stars.length; i++) {
+      const star = stars[i];
+      const alpha = star.baseAlpha + Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.25;
+      const curX = (star.x + offsetX * star.depth + width) % width;
+      const curY = (star.y + offsetY * star.depth + height) % height;
+
+      ctx.fillStyle = star.color;
+      ctx.globalAlpha = Math.max(0.1, Math.min(1, alpha));
+      ctx.beginPath();
+      ctx.arc(curX, curY, star.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Soft glow for larger stars
+      if (star.size > 1.4) {
+        ctx.globalAlpha = alpha * 0.35;
+        ctx.beginPath();
+        ctx.arc(curX, curY, star.size * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+}
+
+/* ===== 3D CARD TILT INTERACTION (Subtle & Smooth) ===== */
+function init3DCardTilt() {
+  if (window.matchMedia('(pointer: coarse)').matches) return; // Skip on touch devices
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const tiltCards = document.querySelectorAll('.card, .stat-card, .project-block, .arch-trigger-card');
+  tiltCards.forEach(card => {
+    let bounds = null;
+
+    card.addEventListener('mouseenter', () => {
+      bounds = card.getBoundingClientRect();
+      card.style.transition = 'transform 0.1s ease-out, box-shadow 0.25s ease';
+    });
+
+    card.addEventListener('mousemove', e => {
+      if (!bounds) bounds = card.getBoundingClientRect();
+      const mouseX = e.clientX - bounds.left;
+      const mouseY = e.clientY - bounds.top;
+
+      const xPct = (mouseX / bounds.width - 0.5) * 2; // -1 to 1
+      const yPct = (mouseY / bounds.height - 0.5) * 2; // -1 to 1
+
+      const tiltX = -yPct * 5; // max ±5 deg
+      const tiltY = xPct * 5;
+
+      card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      bounds = null;
+    });
+  });
+}
+
+/* ===== STARDUST CURSOR TRAIL & CLICK BURST ===== */
+function initStardustCursor() {
+  if (window.matchMedia('(pointer: coarse)').matches) return; // Desktop only
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'cursorCanvas';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }, { passive: true });
+
+  const particles = [];
+  const colors = ['#c084fc', '#67e8f9', '#fbcfe8', '#fde047'];
+
+  let lastX = null;
+  let lastY = null;
+
+  window.addEventListener('mousemove', e => {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    if (lastX !== null) {
+      const dist = Math.hypot(x - lastX, y - lastY);
+      // Spawn a star particle every ~8px movement
+      if (dist > 8 && particles.length < 50) {
+        particles.push({
+          x: x + (Math.random() - 0.5) * 6,
+          y: y + (Math.random() - 0.5) * 6,
+          size: Math.random() * 2.2 + 0.8,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 0.8,
+          vy: Math.random() * 0.6 + 0.2,
+          life: 1,
+          decay: Math.random() * 0.035 + 0.02
+        });
+      }
+    }
+    lastX = x;
+    lastY = y;
+  }, { passive: true });
+
+  // Click burst starburst
+  window.addEventListener('click', e => {
+    const x = e.clientX;
+    const y = e.clientY;
+    for (let i = 0; i < 12; i++) {
+      const angle = (Math.PI * 2 * i) / 12 + Math.random() * 0.2;
+      const speed = Math.random() * 2.5 + 1.2;
+      particles.push({
+        x: x,
+        y: y,
+        size: Math.random() * 2.5 + 1.2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1,
+        decay: Math.random() * 0.03 + 0.025
+      });
+    }
+  }, { passive: true });
+
+  function renderCursor() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= p.decay;
+
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.life * 0.75;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
 }
 
 /* ===== MODEL OUTPUT SWITCHER — Tab Interaction ===== */
@@ -300,6 +524,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgress();
   initReveal();
   initStatCounter();
+  initStarfield();
+  init3DCardTilt();
+  initStardustCursor();
   initModelSwitcher();
   initLightboxModal();
 });
