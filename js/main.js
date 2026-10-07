@@ -21,21 +21,65 @@ document.querySelectorAll('a.scroll-link, .project-tabs a').forEach(link => {
 
 /* ===== SCROLLSPY — highlight active nav section ===== */
 function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id], article[id]');
+  const sectionIds = ['home', 'about', 'projects', 'contact'];
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
   const navLinks = document.querySelectorAll('.nav-links a[data-section]');
-  const offset = 90;
+  const navHeight = document.getElementById('main-nav')?.offsetHeight || 68;
 
-  function onScroll() {
-    let current = '';
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - offset) current = sec.id;
-    });
+  function updateActive(activeId) {
     navLinks.forEach(a => {
-      a.classList.toggle('active', a.dataset.section === current);
+      a.classList.toggle('active', a.dataset.section === activeId);
     });
   }
 
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // Edge check: near bottom of page -> contact
+    if (scrollY + windowHeight >= docHeight - 60) {
+      updateActive('contact');
+      return;
+    }
+
+    // Edge check: near top of page -> home
+    if (scrollY < 120) {
+      updateActive('home');
+      return;
+    }
+
+    // Probe position: slightly below sticky nav
+    const probeY = scrollY + navHeight + 80;
+    let current = '';
+
+    for (let i = 0; i < sections.length; i++) {
+      const sec = sections[i];
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (probeY >= top && probeY < top + height) {
+        current = sec.id;
+        break;
+      }
+    }
+
+    // In-between section dividers fallback
+    if (!current) {
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (probeY >= sections[i].offsetTop) {
+          current = sections[i].id;
+          break;
+        }
+      }
+    }
+
+    updateActive(current || 'home');
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 }
 
@@ -284,42 +328,6 @@ function initStarfield() {
   requestAnimationFrame(render);
 }
 
-/* ===== 3D CARD TILT INTERACTION (Subtle & Smooth) ===== */
-function init3DCardTilt() {
-  if (window.matchMedia('(pointer: coarse)').matches) return; // Skip on touch devices
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const tiltCards = document.querySelectorAll('.card, .stat-card, .project-block, .arch-trigger-card');
-  tiltCards.forEach(card => {
-    let bounds = null;
-
-    card.addEventListener('mouseenter', () => {
-      bounds = card.getBoundingClientRect();
-      card.style.transition = 'transform 0.1s ease-out, box-shadow 0.25s ease';
-    });
-
-    card.addEventListener('mousemove', e => {
-      if (!bounds) bounds = card.getBoundingClientRect();
-      const mouseX = e.clientX - bounds.left;
-      const mouseY = e.clientY - bounds.top;
-
-      const xPct = (mouseX / bounds.width - 0.5) * 2; // -1 to 1
-      const yPct = (mouseY / bounds.height - 0.5) * 2; // -1 to 1
-
-      const tiltX = -yPct * 5; // max ±5 deg
-      const tiltY = xPct * 5;
-
-      card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-4px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease';
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-      bounds = null;
-    });
-  });
-}
-
 /* ===== STARDUST CURSOR TRAIL & CLICK BURST ===== */
 function initStardustCursor() {
   if (window.matchMedia('(pointer: coarse)').matches) return; // Desktop only
@@ -525,7 +533,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initStatCounter();
   initStarfield();
-  init3DCardTilt();
   initStardustCursor();
   initModelSwitcher();
   initLightboxModal();

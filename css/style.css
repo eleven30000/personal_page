@@ -204,9 +204,14 @@ nav {
 .nav-links a.active::after {
   content: ''; position: absolute;
   bottom: 2px; left: 50%; transform: translateX(-50%);
-  width: 16px; height: 3px; border-radius: 2px;
+  width: 18px; height: 3px; border-radius: 2px;
   background: var(--gradient-main);
-  box-shadow: 0 0 8px var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan), 0 0 4px #fff;
+  animation: navGlow 2s ease-in-out infinite alternate;
+}
+@keyframes navGlow {
+  from { box-shadow: 0 0 6px var(--neon-cyan); opacity: 0.85; }
+  to { box-shadow: 0 0 14px var(--neon-cyan), 0 0 6px var(--neon-purple); opacity: 1; }
 }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
 .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
@@ -468,7 +473,7 @@ main > .section-divider::after {
   background: linear-gradient(90deg, rgba(6, 182, 212, 0.3), transparent);
 }
 
-/* ===== CARDS (Glassmorphism & 3D Tilt) ===== */
+/* ===== CARDS (Glassmorphism & Crisp Readability) ===== */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -479,7 +484,6 @@ main > .section-divider::after {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
-  transform-style: preserve-3d;
 }
 .card::before {
   content: ''; position: absolute; inset: 0;
@@ -489,7 +493,8 @@ main > .section-divider::after {
 }
 .card:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-lg), 0 0 30px rgba(168, 85, 247, 0.22);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 26px rgba(168, 85, 247, 0.24);
+  transform: translateY(-4px);
 }
 .card:hover::before { opacity: 1; }
 .card-inner-title {
@@ -613,6 +618,7 @@ main > .section-divider::after {
 
 /* ===== PROJECT BLOCK ===== */
 .project-block {
+  position: relative;
   border: 1px solid var(--border); border-radius: var(--radius-lg);
   overflow: hidden; margin-bottom: 3.5rem;
   background: rgba(13, 20, 36, 0.85);
@@ -623,7 +629,24 @@ main > .section-divider::after {
 }
 .project-block:hover {
   border-color: rgba(168, 85, 247, 0.55);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 32px rgba(168, 85, 247, 0.22);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 30px rgba(168, 85, 247, 0.22);
+  transform: translateY(-3px);
+}
+/* Cosmic Laser Scanner Sweep on Entry */
+.project-block::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--neon-cyan) 30%, var(--neon-purple) 70%, transparent 100%);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.85s var(--ease-out), opacity 0.85s ease;
+  pointer-events: none;
+}
+.project-block.visible::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 .project-header {
   padding: 2rem 2rem 1.5rem;
@@ -646,8 +669,25 @@ main > .section-divider::after {
 }
 .project-subtitle { font-size: .9rem; color: var(--neon-cyan); margin-top: .3rem; }
 
-/* project subsections */
-.proj-subsection { padding: 1.75rem 2rem; border-bottom: 1px solid var(--border); }
+/* project subsections with waterfall entry */
+.proj-subsection {
+  padding: 1.75rem 2rem; border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.project-block.visible .proj-subsection:nth-of-type(1) {
+  opacity: 1; transform: translateY(0); transition-delay: 0.12s;
+}
+.project-block.visible .proj-subsection:nth-of-type(2) {
+  opacity: 1; transform: translateY(0); transition-delay: 0.22s;
+}
+.project-block.visible .proj-subsection:nth-of-type(3) {
+  opacity: 1; transform: translateY(0); transition-delay: 0.32s;
+}
+.project-block.visible .proj-subsection:nth-of-type(4) {
+  opacity: 1; transform: translateY(0); transition-delay: 0.42s;
+}
 .proj-subsection:last-child { border-bottom: none; }
 .proj-sub-label {
   font-family: var(--mono); font-size: .75rem; color: var(--neon-cyan);
@@ -761,16 +801,16 @@ footer {
   border-top: 1px solid var(--border); position: relative; z-index: 2;
 }
 
-/* ===== SCROLL REVEAL (3D Spatial Perspective) ===== */
+/* ===== SCROLL REVEAL (Clean & Crisp 2D Entrance) ===== */
 .reveal {
   opacity: 0;
-  transform: perspective(1000px) rotateX(4deg) translateY(24px);
-  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transform: translateY(28px) scale(0.985);
+  transition: opacity 0.68s var(--ease-out), transform 0.68s var(--ease-out);
   will-change: opacity, transform;
 }
 .reveal.visible {
   opacity: 1;
-  transform: perspective(1000px) rotateX(0deg) translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 /* Staggered entrance for sibling cards and items */
