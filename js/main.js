@@ -85,7 +85,7 @@ function initScrollSpy() {
 
 /* ===== NAV SCROLL SHADOW & BLUR ===== */
 function initNavScroll() {
-  const nav = document.querySelector('nav');
+  const nav = document.getElementById('main-nav');
   if (!nav) return;
   window.addEventListener('scroll', () => {
     nav.style.background = window.scrollY > 20

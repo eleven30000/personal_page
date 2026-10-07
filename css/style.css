@@ -156,7 +156,7 @@ body::before {
 }
 
 /* ===== NAVIGATION ===== */
-nav {
+#main-nav {
   position: fixed; top: 0; left: 0; right: 0;
   height: var(--nav-h);
   background: rgba(7, 10, 19, 0.85);
@@ -671,6 +671,7 @@ main > .section-divider::after {
 
 /* ===== PROJECT TABS ===== */
 .project-tabs {
+  position: relative;
   display: flex; gap: .5rem; flex-wrap: wrap;
   margin-bottom: 3rem; padding: .5rem;
   background: rgba(15, 23, 42, 0.8);
@@ -898,9 +899,22 @@ footer {
   .img-grid-3 { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .section {
+    padding: clamp(3.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 1.75rem);
+  }
+  .card {
+    padding: 1.35rem 1.15rem;
+  }
   .hero { flex-direction: column-reverse; text-align: center; }
   .hero-desc { margin: 0 auto 2.5rem; }
   .hero-cta, .hero-social { justify-content: center; }
+  .avatar-ring {
+    width: clamp(190px, 46vw, 250px);
+    height: clamp(190px, 46vw, 250px);
+  }
+  .orbit-ring-1 { width: calc(100% + 40px); height: calc(100% + 40px); }
+  .orbit-ring-2 { width: calc(100% + 72px); height: calc(100% + 72px); }
+
   .nav-controls { gap: .65rem; }
   .lang-switch-pill { padding: .26rem .58rem; font-size: .75rem; }
   .nav-links {
@@ -914,21 +928,90 @@ footer {
   .nav-links a { padding: .75rem 1rem; font-size: 1rem; }
   .nav-toggle { display: flex; }
   .contact-grid { grid-template-columns: 1fr; }
-  .project-header, .proj-subsection { padding: 1.25rem; }
+  .contact-item a { word-break: break-all; }
+  .project-header, .proj-subsection { padding: 1.25rem 1rem; }
   .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
-  .project-tabs { width: 100%; }
-  .stats-row { gap: 1rem; }
   .example-demo { grid-template-columns: 1fr; }
   .edu-col { grid-template-columns: 1fr; }
-  .edu-float { width: 180px; max-width: 45%; }
-  .edu-float .edu-photo { height: 230px; }
   .demo-img { height: 220px; }
   .img-placeholder-wrap img { height: auto; max-height: 220px; }
   .arch-thumb-wrap { height: 150px; }
+
+  /* Model Output Switcher Mobile Optimization: 3-column equal grid */
+  .sw-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .65rem;
+    padding: .85rem 1rem;
+  }
+  .sw-label {
+    text-align: center;
+    font-size: .75rem;
+  }
+  .sw-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: .35rem;
+  }
+  .sw-tab {
+    width: 100%;
+    text-align: center;
+    padding: .45rem .2rem;
+    font-size: .8rem;
+    white-space: nowrap;
+  }
 }
+
+@media (max-width: 640px) {
+  .project-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: .45rem;
+    padding: .45rem;
+  }
+  .proj-tab {
+    text-align: center;
+    padding: .5rem .35rem;
+    font-size: .8rem;
+  }
+  .edu-float {
+    float: none;
+    margin: 0 auto 1.5rem;
+    width: 100%;
+    max-width: 260px;
+    display: block;
+  }
+  .edu-float .edu-photo {
+    height: 260px;
+  }
+  .table-wrap {
+    -webkit-overflow-scrolling: touch;
+  }
+  .data-table {
+    min-width: 460px;
+  }
+}
+
 @media (max-width: 480px) {
+  #main-nav { padding: 0 1rem; }
+  .nav-logo { font-size: 1.05rem; }
   .skills-grid { grid-template-columns: 1fr; }
-  .stat-card { flex: 1 1 140px; }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .75rem;
+  }
+  .stat-card {
+    padding: 1rem .6rem;
+  }
+  .lightbox-close {
+    top: -42px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+  }
 }
 
 /* ===== EDUCATION PHOTO ===== */
